@@ -30,5 +30,10 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/ingresos', [IngresosController::class, 'index'])->name('ingresos.index');
+Route::post('/ingresos', [IngresosController::class, 'store']);
+Route::delete('/ingresos{id}', [IngresosController::class, 'destroy'])->name('ingresos.destroy');
 
-Route::get('/egresos', [EgresosController::class, 'index'] );
+Route::get('/editar{id}', [IngresosController::class, 'show'])->name('editar');
+Route::post('/editar', [IngresosController::class, 'update'])->name('editar.update');
+
+Route::get('/egresos', [EgresosController::class, 'index'] )->name('egresos.index');

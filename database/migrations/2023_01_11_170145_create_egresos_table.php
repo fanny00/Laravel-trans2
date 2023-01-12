@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('egresos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->bigInteger('usuario_id')->unsigned();
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->string('nombre_egreso');
             $table->integer('monto_egreso');
-            $table->integer('saldo_total');
             $table->timestamps();
         });
     }

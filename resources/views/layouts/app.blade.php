@@ -33,7 +33,7 @@
 
                 @guest
                     <nav class="flex gap-2 items-center">
-                        <a class="font-bold text-gray-600 text-sm" href="#">Login</a>
+                        <a class="font-bold text-gray-600 text-sm" href="{{ route('login') }}">Login</a>
                         <a class="font-bold text-gray-600 text-sm" href="{{ route('register') }}">
                             Crear Cuenta
                         </a>
@@ -42,6 +42,28 @@
             </div>
             
         </header>
+
+
+            <nav class="bg-gray-50 dark:bg-sky-600">
+                <div class="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
+                    <div class="flex items-center">
+                        <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
+                            <li>
+                                <a href="#" class="text-gray-900 dark:text-white hover:underline uppercase" aria-current="page">Inicio</a>
+                            </li>
+                            <span class="dark:text-white">|</span>
+                            <li>
+                                <a href="{{ route('ingresos.index') }}" class="text-gray-900 dark:text-white hover:underline uppercase">Agregar dinero</a>
+                            </li>
+                            <span class="dark:text-white">|</span>
+                            <li>
+                                <a href="{{ route('egresos.index') }}" class="text-gray-900 dark:text-white hover:underline uppercase">Agregar Gastos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
 
         <main class="container mx-auto mt-10">
             <h2 class="text-gray-700 font-bold text-center text-3xl mb-10">

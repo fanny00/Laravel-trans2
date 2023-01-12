@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('ingresos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('ingresos_id')->unsigned(); 
-            $table->foreign('ingresos_id')->references('id')->on('users');
+            $table->bigInteger('usuario_id')->unsigned(); 
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->string('nombre_ingreso');
             $table->integer('monto_ingreso');
-            $table->integer('total_ingresos');
             $table->timestamps();
         });
     }
