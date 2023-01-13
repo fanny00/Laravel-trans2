@@ -35,12 +35,12 @@
                 name="nombre_ingreso"
                 type="text"
                 placeholder="Nombre del ingreso"
-                class="border p-3 w-full rounded-lg @error('name') border-red-500 @enderror"
+                class="border p-3 w-full rounded-lg @error('nombre_ingreso') border-red-500 @enderror"
                 value="{{ old('nombre_ingreso') }}"
             />
-            @error('name')
+            @error('nombre_ingreso')
                 <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                    Por favor escriba el nombre del ingreso
+                    Por favor escriba un nombre de ingreso
                 </p>
             @enderror
 
@@ -81,64 +81,76 @@
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div class="overflow-hidden">
-                <table class="min-w-full rp-6 rounded-lg shadow-xl">
-                <thead class="bg-sky-100 border-b">
-                    <tr>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                            Id
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                            Nombre Ingreso
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                            Monto Ingreso
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                @if($ingresos->isEmpty())
+                    
+                 @else 
+                    <table class="min-w-full rp-6 rounded-lg shadow-xl">
+                        <thead class="bg-sky-100 border-b">
+                            <tr>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    Id
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    Nombre Ingreso
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    Monto Ingreso
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($ingresos as $ingreso)
+                                <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{ $ingreso->id }}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        {{ $ingreso->nombre_ingreso }}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    $ {{ $ingreso->monto_ingreso }}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        <a href="{{ route('editar',$ingreso->id) }}" class="cursor-pointer uppercase inline-block px-2 py-1 bg-sky-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                                            Editar
+                                        </a>
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        <form method="POST" action="{{route('ingresos.destroy',$ingreso->id)}}">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="inline-block px-2 py-1 bg-red-500 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+        
                             
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                            
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($ingresos as $ingreso)
-                        <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ $ingreso->id }}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {{ $ingreso->nombre_ingreso }}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                               $ {{ $ingreso->monto_ingreso }}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                <a href="{{ route('editar',$ingreso->id) }}" class="cursor-pointer uppercase inline-block px-2 py-1 bg-sky-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
-                                    Editar
-                                </a>
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                <form method="POST" action="{{route('ingresos.destroy',$ingreso->id)}}">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="inline-block px-2 py-1 bg-red-500 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">
-                                        Eliminar
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-
-                       
-                    @endforeach
-
-                    <div>
-
-                    </div>
-                </tbody>
-                </table>
+                            @endforeach
+        
+                            <div>
+        
+                            </div>
+                        </tbody>
+                    </table>
+                @endif
+                    
+            
+                
                 <div class="text-lg font-bold text-sky-800 px-6 py-4 text-right">
-                    Total Ingresos :  ${{ $ingresos->sum('monto_ingreso') }} 
+                    Total Ingresos :  ${{ $ingresos->sum('monto_ingreso') }} -
+                    Total Egresos :  ${{ $egresos->sum('monto_egreso') }} 
+                </div>
+                <div class="text-lg font-bold text-sky-800 px-6 py-4 text-right uppercase">
+                    Saldo Total :  ${{ $ingresos->sum('monto_ingreso') - $egresos->sum('monto_egreso') }}
+                    
                 </div>
             </div>
             </div>

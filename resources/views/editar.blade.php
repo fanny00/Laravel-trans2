@@ -51,7 +51,7 @@
 
             <input 
                     type="submit"
-                    value="Agregar Ingreso"
+                    value="Editar Ingreso"
                     class="mt-5 bg-sky-600 hover:bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg"
                 />
         </div>

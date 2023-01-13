@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ingresos;
+use App\Models\Egreso;
+use App\Models\Ingreso;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -17,9 +18,13 @@ class IngresosController extends Controller
     public function index(User $user)
     {
         // dd($user->username);
-        $ingresos = Ingresos::orderBy('id','desc')->paginate(5);
+        $ingresos = Ingreso::orderBy('id','desc')->paginate(5);
+
+        $egresos = Egreso::orderBy('id','desc')->paginate(5);
+
         return view('ingresos', [
             'user' => $user,
+            'egresos' => $egresos,
             'ingresos' => $ingresos
         ]);
     }
@@ -27,7 +32,13 @@ class IngresosController extends Controller
     public function store(Request $request )
     {
 
-        Ingresos::create([
+        $this->validate($request, [
+            'usuario_id' => 'required',
+            'nombre_ingreso' => 'required|max:30',
+            'monto_ingreso'  => 'required',
+        ]);
+
+        Ingreso::create([
             'usuario_id' => $request->usuario_id,
             'nombre_ingreso' => $request->nombre_ingreso,
             'monto_ingreso'  => $request->monto_ingreso,
@@ -38,7 +49,7 @@ class IngresosController extends Controller
 
     public function show($id)
     {
-      $ingresos=Ingresos::find($id);
+      $ingresos=Ingreso::find($id);
       
       return view('editar', [
         'ingresos' => $ingresos
@@ -47,7 +58,12 @@ class IngresosController extends Controller
 
     public function update(Request $request)
     {
-        $ingresosData=Ingresos::find($request->id);
+        $this->validate($request, [
+            'nombre_ingreso' => 'required|max:30',
+            'monto_ingreso'  => 'required',
+        ]);
+
+        $ingresosData=Ingreso::find($request->id);
  
         $ingresosData->nombre_ingreso = $request->nombre_ingreso;
         $ingresosData->monto_ingreso  = $request->monto_ingreso;
@@ -59,7 +75,7 @@ class IngresosController extends Controller
 
     public function destroy($id)
     {
-        Ingresos::destroy($id);
+        Ingreso::destroy($id);
 
         return redirect()->route('ingresos.index')->with('message','Eliminación correcta');
     }

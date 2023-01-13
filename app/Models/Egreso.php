@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ingresos extends Model
+class Egreso extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,8 @@ class Ingresos extends Model
      */
     protected $fillable = [
         'usuario_id',
-        'nombre_ingreso',
-        'monto_ingreso',
-        'total_ingresos'
+        'nombre_egreso',
+        'monto_egreso'
     ];
+
 }

@@ -44,21 +44,19 @@
         </header>
 
 
-            <nav class="bg-gray-50 dark:bg-sky-600">
+            <nav class="bg-gray-50 dark:bg-sky-600 flex justify-center">
                 <div class="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
                     <div class="flex items-center">
                         <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
+                            <span class="dark:text-white">|</span>
                             <li>
-                                <a href="#" class="text-gray-900 dark:text-white hover:underline uppercase" aria-current="page">Inicio</a>
+                                <a href="{{ route('ingresos.index') }}" class="text-gray-900 dark:text-white hover:underline uppercase">Ingresos</a>
                             </li>
                             <span class="dark:text-white">|</span>
                             <li>
-                                <a href="{{ route('ingresos.index') }}" class="text-gray-900 dark:text-white hover:underline uppercase">Agregar dinero</a>
+                                <a href="{{ route('egresos.index') }}" class="text-gray-900 dark:text-white hover:underline uppercase">Egresos</a>
                             </li>
                             <span class="dark:text-white">|</span>
-                            <li>
-                                <a href="{{ route('egresos.index') }}" class="text-gray-900 dark:text-white hover:underline uppercase">Agregar Gastos</a>
-                            </li>
                         </ul>
                     </div>
                 </div>

@@ -37,3 +37,8 @@ Route::get('/editar{id}', [IngresosController::class, 'show'])->name('editar');
 Route::post('/editar', [IngresosController::class, 'update'])->name('editar.update');
 
 Route::get('/egresos', [EgresosController::class, 'index'] )->name('egresos.index');
+Route::post('/egresos', [EgresosController::class, 'store']);
+Route::delete('/egresos{id}', [EgresosController::class, 'destroy'])->name('egresos.destroy');
+
+Route::get('/editar-egreso{id}', [EgresosController::class, 'show'])->name('editar-egreso');
+Route::post('/editar-egreso', [EgresosController::class, 'update'])->name('editar-egreso.update');
